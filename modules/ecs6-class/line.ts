@@ -16,40 +16,46 @@ class Line {
     }
 
     calculateNOfLineFunction() {
+        this.calculateSlope();
         if (this.slope !== undefined) {
-            this.n = this.point1.y - this.slope * this.point1.x;
+            this.n = this.point1.y - (this.slope * this.point1.x);
         }
     }
 
     getPointOnXAsis() {
+        this.calculateNOfLineFunction();
         if (this.slope !== 0 && this.slope !== undefined && this.n !== undefined) {
-            const x = -this.n / this.slope;
+            const x = -this.n / this.slope;            
             return new Point({ x, y: 0 });
         }
         return undefined;
     }
-getPointOnYAsis() {
-        if (this.n !== undefined) {
-            return new Point({ x: 0, y: this.n });
+    getPointOnYAsis() {
+        this.calculateNOfLineFunction();
+                if (this.n !== undefined) {
+                    return new Point({ x: 0, y: this.n });
+                }
+                return undefined;
         }
-        return undefined;
-    }
 
-    getPointByX(x: number) {
-        if (this.slope !== undefined && this.n !== undefined) {
-            const y = this.slope * x + this.n;
-            return new Point({ x, y });
+        getPointByX(x: number) {
+            this.calculateNOfLineFunction();
+            
+            if (this.slope !== undefined && this.n !== undefined) {
+                const y = this.slope * x + this.n;
+                return new Point({ x, y });
+            }
+            return undefined;
         }
-        return undefined;
-    }
 
-    getPointByY(y: number) {
-        if (this.slope !== 0 && this.slope !== undefined && this.n !== undefined) {
-            const x = (y - this.n) / this.slope;
-            return new Point({ x, y });
+        getPointByY(y: number) {
+            this.calculateNOfLineFunction();
+            if (this.slope !== 0 && this.slope !== undefined && this.n !== undefined) {
+                const x = (y - this.n) / this.slope;
+                return new Point({ x, y });
+            }
+            return undefined;
         }
-        return undefined;
-    }
 }
 
 export default Line;
