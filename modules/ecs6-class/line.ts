@@ -32,10 +32,8 @@ class Line {
     }
     getPointOnYAsis() {
         this.calculateNOfLineFunction();
-                if (this.n !== undefined) {
-                    return new Point({ x: 0, y: this.n });
-                }
-                return undefined;
+            return new Point({ x: 0, y: this.n });
+                
         }
 
         getPointByX(x: number) {
